@@ -7,7 +7,7 @@
                 <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                     <ul class="nav">
-                        <li class="{{ isActiveRoute('employees') }}">
+                        <li class="">
                             <a href="index.html" class="active">
                                 <i class="fa fa-dashboard icon">
                                     <b class="bg-danger"></b>
@@ -15,12 +15,20 @@
                                 <span>Thống kê</span>
                             </a>
                         </li>
-                        <li class="{{ isActiveRoute('employees') }}">
+                        <li class="{{ isActiveRoute('page.sale') }}">
                             <a href="#layout">
-                                <i class="fa fa-columns icon">
+                                <i class="fa fa-money icon">
                                     <b class="bg-warning"></b>
                                 </i>
                                 <span>Bán hàng</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#layout">
+                                <i class="fa fa-file icon">
+                                    <b class="bg-primary"></b>
+                                </i>
+                                <span>Khách hàng</span>
                             </a>
                         </li>
                     </ul>

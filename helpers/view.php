@@ -42,3 +42,9 @@ if(! function_exists("parseSex"))
         return $input === 1 ? '<span class="label bg-success">Nam</span>': '<span class="label bg-danger">Nữ</i></span>';
     }
 }
+
+if (!function_exists('formatMoney')) {
+    function formatMoney($input) {
+        return number_format($input, 0, '.', ','). ' VNĐ';
+    }
+}
