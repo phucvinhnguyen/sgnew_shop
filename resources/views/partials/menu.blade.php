@@ -7,8 +7,8 @@
                 <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                     <ul class="nav">
-                        <li class="">
-                            <a href="index.html" class="active">
+                        <li class="{{ isActiveRoute('page.statistic') }}">
+                            <a href="{{ route('page.statistic') }}">
                                 <i class="fa fa-dashboard icon">
                                     <b class="bg-danger"></b>
                                 </i>
@@ -16,15 +16,15 @@
                             </a>
                         </li>
                         <li class="{{ isActiveRoute('page.sale') }}">
-                            <a href="#layout">
+                            <a href="{{ route('page.sale') }}">
                                 <i class="fa fa-money icon">
                                     <b class="bg-warning"></b>
                                 </i>
                                 <span>Bán hàng</span>
                             </a>
                         </li>
-                        <li class="">
-                            <a href="#layout">
+                        <li class="{{ isActiveRoute('page.customer') }}">
+                            <a href="{{ route('page.customer') }}">
                                 <i class="fa fa-file icon">
                                     <b class="bg-primary"></b>
                                 </i>
