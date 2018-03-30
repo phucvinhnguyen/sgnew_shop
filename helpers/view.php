@@ -28,8 +28,9 @@ if(! function_exists("routeQuery"))
 {
     function routeQuery($route)
     {
-        $access_token = Request::has('access_token') ? Request::get('access_token') : '';
-        $query = Request::all();
+        $phone = Request::has('phone') ? Request::get('phone') : '';
+
+        $query['phone'] = $phone;
 
         return route($route).'?'.http_build_query($query);
     }
