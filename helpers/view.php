@@ -49,3 +49,9 @@ if (!function_exists('formatMoney')) {
         return number_format($input, 0, '.', ','). ' VNĐ';
     }
 }
+
+if (!function_exists('sumArrayColumn')) {
+    function sumArrayColumn($array, $column) {
+        return array_sum(array_column($array, $column));
+    }
+}

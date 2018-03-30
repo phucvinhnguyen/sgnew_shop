@@ -28,6 +28,8 @@
                                 </div>
                                 @if (!$newCustomer && isset($customer))
                                     <span>KHÁCH HÀNG: <b>{{ $customer->full_name }}</b></span>
+                                @else
+                                <span class="text text-danger">KHÁCH HÀNG MỚI</span>
                                 @endif
 
                         </div>

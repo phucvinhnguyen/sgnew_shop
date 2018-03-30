@@ -26,7 +26,8 @@
             "App\\": "app/"
         },
         "files": [
-            "helpers/view.php"
+            "helpers/view.php",
+            "helpers/datetime.php"
         ]
     },
     "autoload-dev": {

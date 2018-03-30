@@ -27,3 +27,4 @@ Route::post('/customer/addInfo', 'CustomerController@createNewCustomerInfo')->na
 Route::post('/customer/searchCustomer', 'CustomerController@searchCustomer')->name('page.customer.search');
 
 Route::get('/statistic', 'StatisticController@index')->name('page.statistic');
+Route::post('/statistic/searchDate', 'StatisticController@searchDate')->name('page.statistic.searchDate');

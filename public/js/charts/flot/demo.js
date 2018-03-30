@@ -1,11 +1,16 @@
 $(function(){
 
   // 
-  var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var monthNames = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
   var d1 = [];
-  for (var i = 0; i <= 11; i += 1) {
+  for (var i = 0; i < monthNames.length; i++) {
     d1.push([i, parseInt((Math.floor(Math.random() * (1 + 20 - 10))) + 10)]);
   }
+
+  function xAxisFormatter(x) {
+      return monthNames[x];
+  }
+
   $("#flot-1ine").length && $.plot($("#flot-1ine"), [{
           data: d1
       }], 
@@ -42,6 +47,7 @@ $(function(){
         },
         colors: ["#65bd77"],
         xaxis:{
+            tickFormatter: xAxisFormatter
         },
         yaxis: {
           ticks: 5
