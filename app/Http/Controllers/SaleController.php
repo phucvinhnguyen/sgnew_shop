@@ -16,16 +16,19 @@ class SaleController extends Controller
 
     public function index(Request $request)
     {
-        //$request->session()->forget('cart');
+//        $request->session()->forget('cart');
         $cart = $request->session()->get('cart');
-        $customer = $request->session()->get('customer');
+
+        $customerCart = $request->session()->get('customerCart');
 
         $totalPrice = 0;
+        $totalReservedPrice = 0;
         if (isset($cart)) {
             $totalPrice = array_sum(array_column($cart, 'price-product'));
+            $totalReservedPrice = array_sum(array_column($cart, 'reserved-price-product'));
         }
 
-
+        $customer = null;
         $phone = $request->query('phone');
 
         $newCustomer = false;
@@ -37,7 +40,11 @@ class SaleController extends Controller
             }
         }
 
-        return view('pages.sale', ['cart' => $cart, 'customer' => $customer, 'total' => $totalPrice, 'newCustomer' => $newCustomer]);
+        return view('pages.sale', ['cart' => $cart,
+            'customer' => $customer,
+            'total' => $totalPrice,
+            'totalReservedPrice' => $totalReservedPrice,
+            'newCustomer' => $newCustomer]);
     }
 
     public function searchCustomer(Request $request)
@@ -49,17 +56,21 @@ class SaleController extends Controller
     {
         $newCartItemName = $request->get('name-product');
         $newCartItemPrice = $request->get('price-product');
+        $newCartReservedPrice = $request->get('reserved-price-product');
 
         if (!$request->session()->has('cart')) {
             $request->session()->put('cart', null);
         }
+        if (empty($newCartReservedPrice)) {
+            $newCartReservedPrice = $newCartItemPrice;
+        }
 
         $cart = $request->session()->get('cart');
-        $cart[] = ['name-product' => $newCartItemName, 'price-product' => $newCartItemPrice];
+        $cart[] = ['name-product' => $newCartItemName, 'price-product' => $newCartItemPrice, 'reserved-price-product' => $newCartReservedPrice];
 
         $request->session()->put('cart', $cart);
 
-        return redirect()->route('page.sale');
+        return redirect(routeQuery('page.sale'));
 
     }
 
@@ -74,7 +85,7 @@ class SaleController extends Controller
                 $request->session()->put('cart', $cart);
             }
         }
-        return redirect()->route('page.sale');
+        return redirect(routeQuery('page.sale'));
     }
 
     public function deleteAll(Request $request)
@@ -86,13 +97,6 @@ class SaleController extends Controller
         if ($request->session()->has('customer')) {
             $request->session()->forget('customer');
         }
-
         return redirect()->route('page.sale');
-    }
-
-    public function checkOut(Request $request)
-    {
-        $cart = $request->session()->get('cart');
-
     }
 }
