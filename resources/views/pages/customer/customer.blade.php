@@ -49,15 +49,17 @@
                                         <thead>
                                         <tr>
                                             <th>Ngày</th>
-                                            <th>Thông tin</th>
+                                            <th>Thao tác</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($customerInfo as $info)
                                             <tr>
-                                                <td>{{ $info->created_at }}</td>
+                                                <td><a href="{{ route('page.customer', ['phone' => Request::query('phone'), 'infoId' => $info->id]) }}">{{ $info->created_at }}</a></td>
                                                 <td>
-                                                    <a href="{{ route('page.customer', ['phone' => Request::query('phone'), 'infoId' => $info->id]) }}" class="btn btn-default">Xem</a>
+                                                    <button class="btn btn-danger btn-delete-customer-info" data-info-id="{{ $info->id }}">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -78,4 +80,32 @@
         </section>
     </section>
     @include('pages.customer.modal.add-info')
+    @include('pages.customer.modal.delete-info')
+    @include('pages.customer.modal.payment-info')
+@endsection
+
+@section('embed-scripts')
+    <script>
+        $(document).ready(function () {
+            $('.btn-delete-customer-info').click(function () {
+                var customerInfoId = $(this).data("info-id");
+                $('#customerInfoIdVal').val(customerInfoId);
+                $('#delete-info-customer-modal').modal('show');
+            });
+
+            $('.btn-edit-payment').click(function () {
+                var paymentId = $(this).data("payment-info");
+                var paymentTitle = $(this).data("payment-title");
+                var paymentPrice = $(this).data("payment-price");
+                var paymentReserved = $(this).data("payment-reserved");
+
+                $('#payment-id').val(paymentId);
+                $('#payment-name-product').val(paymentTitle);
+                $('#payment-price').val(paymentPrice);
+                $('#payment-reserved').val(paymentReserved);
+                $('#payment-info-customer-modal').modal('show');
+            })
+
+        });
+    </script>
 @endsection

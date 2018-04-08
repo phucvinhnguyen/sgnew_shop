@@ -7,14 +7,6 @@
                 <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                     <ul class="nav">
-                        <li class="{{ isActiveRoute('page.statistic') }}">
-                            <a href="{{ route('page.statistic') }}">
-                                <i class="fa fa-dashboard icon">
-                                    <b class="bg-danger"></b>
-                                </i>
-                                <span>Thống kê</span>
-                            </a>
-                        </li>
                         <li class="{{ isActiveRoute('page.sale') }}">
                             <a href="{{ route('page.sale') }}">
                                 <i class="fa fa-money icon">
@@ -31,8 +23,22 @@
                                 <span>Khách hàng</span>
                             </a>
                         </li>
-                    </ul>
-                    </li>
+                        <li class="{{ isActiveRoute('page.statistic') }}">
+                            <a href="{{ route('page.statistic') }}">
+                                <i class="fa fa-dashboard icon">
+                                    <b class="bg-danger"></b>
+                                </i>
+                                <span>Doanh thu</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#">
+                                <i class="fa fa-cog icon">
+                                    <b class="bg-primary"></b>
+                                </i>
+                                <span>Cài đặt</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- / nav -->

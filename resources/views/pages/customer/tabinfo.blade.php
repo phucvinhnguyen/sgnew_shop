@@ -5,7 +5,7 @@
             <li class=""><a href="#messages-2" data-toggle="tab"><i class="fa fa- text-default"></i> Thông tin Mua hàng</a></li>
             <li class=""><a href="#setting-2" data-toggle="tab"><i class="fa fa- text-default"></i> Thiết lập</a></li>
         </ul>
-        <span class="hidden-sm">Left tab</span>
+        <span class="hidden-sm">Hôm nay: {{ date('d-m-Y') }}</span>
     </header>
     <div class="panel-body">
         <div class="tab-content">
@@ -67,12 +67,17 @@
                     <tbody>
                     @foreach($buyInfoList as $info)
                         <tr>
-                            <td>{{ $info->created_at }}</td>
+                            <td>{{ date_format($info->created_at, 'd/m/Y H:i:s') }}</td>
                             <td>{{ $info->title }}</td>
                             <td>{{ formatMoney($info->price) }}</td>
                             <td>{{ formatMoney($info->reserved_price)}}</td>
                             <td>{{ formatMoney($info->price - $info->reserved_price)}}</td>
-                            <td><button class="btn btn-success" value="{{ $info->id }}"><i class="fa fa-edit"></i></button></td>
+                            <td>
+                                <button class="btn btn-success btn-edit-payment" data-payment-info="{{ $info->id }}"
+                                        data-payment-title="{{ $info->title }}" data-payment-price="{{ $info->price }}" data-payment-reserved="{{ $info->reserved_price }}">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                     @else
@@ -82,17 +87,21 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="setting-2">
-                <div class="form-group pull-in clearfix">
-                    <div class="col-sm-6">
-                        <label>Tên khách hàng</label>
-                        <input type="text" class="form-control" data-required="true" value="{{ isset($customer) ? $customer->full_name : ''}}">
+                <form action="{{ route('page.customer.editCustomer') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="form-group pull-in clearfix">
+                        <input type="hidden" name="customer_id" value="{{ isset($customer) ? $customer->id : '' }}">
+                        <div class="col-sm-6">
+                            <label>Tên khách hàng</label>
+                            <input type="text" class="form-control" name="customer_name" value="{{ isset($customer) ? $customer->full_name : ''}}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Số điện thoại</label>
+                            <input type="text" class="form-control" name="customer_phone" data-required="true" value="{{ isset($customer) ? $customer->phone : '' }}">
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label>Số điện thoại</label>
-                        <input type="text" class="form-control" data-type="email" data-required="true" value="{{ isset($customer) ? $customer->phone : '' }}">
-                    </div>
-                </div>
-                <button class="btn btn-primary">Lưu</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                </form>
             </div>
         </div>
     </div>
