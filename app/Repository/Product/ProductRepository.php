@@ -36,11 +36,20 @@ class ProductRepository extends BaseRepository
         return $this->model->customerId($customerId)->get();
     }
 
+    public function updatePayment($id, $attributes)
+    {
+        $payment = $this->model->find($id);
+        $payment->title = $attributes['title'];
+        $payment->price = $attributes['price'];
+        $payment->reserved_price = $attributes['reserved_price'];
+        return $payment->save();
+    }
+
     public function getProductBetweenDate($fromDate, $toDate)
     {
         $query = $this->model;
 
-        $query = $query->select(DB::raw('customer_id, sum(reserved_price) as price, date(created_at) as created_at'));
+        $query = $query->select(DB::raw('customer_id, sum(reserved_price) as price, date(created_at) as created_date'));
 
         if (!empty($fromDate)) {
             $query = $query->whereRaw('date(created_at) >= \'' .$fromDate. '\'');
@@ -50,18 +59,14 @@ class ProductRepository extends BaseRepository
             $query = $query->whereRaw('date(created_at) <= \'' .$toDate. '\'');
         }
 
-        $query = $query->groupBy(DB::raw('date(created_at)'))->groupBy('customer_id');
-
+        $query = $query->groupBy(DB::raw('date(created_at), customer_id'));
         $sub = $query->toSql();
 
         $records = DB::table(DB::raw("($sub) as a"))
-            ->select(DB::raw('count(customer_id), sum(price), created_at'))
-            ->mergeBindings($query->getQuery())
-            ->groupBy(DB::raw('date(created_at)'));
+            ->select(DB::raw('count(customer_id) as total_customer, sum(price) as total_price, date(created_date) as created_date '))
+            ->groupBy(DB::raw('date(created_date)'));
 
-        dd($records->get());
-
-        return $records;
+        return $records->get();
     }
 
     public function sumReservedPrice($date)
