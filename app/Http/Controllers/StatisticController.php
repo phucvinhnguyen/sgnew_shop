@@ -24,16 +24,24 @@ class StatisticController extends Controller
             $toDate = date('Y/m/d');
         }
 
-        //$productReportList = $this->productRepository->getProductBetweenDate($fromDate, $toDate);
+        $productReportList = null;
 
-        dd($this->productRepository->getProductBetweenDate('2018-03-29', '2018-03-30'));
+        if (!empty($fromDate)) {
+            $productReportList = $this->productRepository->getProductBetweenDate($fromDate, $toDate);
+        }
 
         $productMoneyToday = $this->productRepository->sumReservedPrice(date('Y/m/d'));
-        return view('pages.statistic.index', ['productMoneyToday' => $productMoneyToday]);
+
+        return view('pages.statistic.index', [
+            'productMoneyToday' => $productMoneyToday,
+            'productReportList' => $productReportList
+        ]);
     }
 
     public function searchDate(Request $request)
     {
         return redirect()->route('page.statistic', ['fromDate' => $request->get('time_FromDate'), 'toDate' => $request->get('time_ToDate')]);
     }
+
+
 }
