@@ -31,8 +31,8 @@
                                 <span>Doanh thu</span>
                             </a>
                         </li>
-                        <li class="">
-                            <a href="#">
+                        <li class="{{ isActiveRoute('page.setting') }}">
+                            <a href="{{ route('page.setting') }}">
                                 <i class="fa fa-cog icon">
                                     <b class="bg-primary"></b>
                                 </i>

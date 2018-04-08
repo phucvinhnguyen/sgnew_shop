@@ -31,3 +31,5 @@ Route::post('/customer/editCustomer', 'CustomerController@editCustomer')->name('
 
 Route::get('/statistic', 'StatisticController@index')->name('page.statistic');
 Route::post('/statistic/searchDate', 'StatisticController@searchDate')->name('page.statistic.searchDate');
+
+Route::get('/setting', 'SettingController@index')->name('page.setting');
