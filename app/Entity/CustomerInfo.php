@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerInfo extends Model
 {
     protected $table = 'customer_info';
+    public $timestamps = false;
 
     public function scopeCustomerId($query, $id)
     {
