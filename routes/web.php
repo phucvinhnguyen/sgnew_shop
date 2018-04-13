@@ -15,21 +15,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/sale', 'SaleController@index')->name('page.sale');
-Route::post('/sale/searchCustomer', 'SaleController@searchCustomer')->name('page.sale.searchCustomer');
-Route::post('/sale/checkOut', 'CheckoutController@checkOut')->name('page.sale.checkout');
-Route::post('/sale/addItem', 'SaleController@addNewCartItem')->name('page.sale.add');
-Route::post('/sale/deleteItem', 'SaleController@deleteCartItem')->name('page.sale.deleteItem');
-Route::post('/sale/deleteAll', 'SaleController@deleteAll')->name('page.sale.deleteAll');
+Route::prefix('sale')->group(function () {
+    Route::get('', 'SaleController@index')->name('page.sale');
+    Route::post('/searchCustomer', 'SaleController@searchCustomer')->name('page.sale.searchCustomer');
+    Route::post('/checkOut', 'CheckoutController@checkOut')->name('page.sale.checkout');
+    Route::post('/addItem', 'SaleController@addNewCartItem')->name('page.sale.add');
+    Route::post('/deleteItem', 'SaleController@deleteCartItem')->name('page.sale.deleteItem');
+    Route::post('/deleteAll', 'SaleController@deleteAll')->name('page.sale.deleteAll');
+});
 
-Route::get('/customer', 'CustomerController@index')->name('page.customer');
-Route::post('/customer/addInfo', 'CustomerController@addInfoCustomer')->name('page.customer.addInfo');
-Route::post('/customer/deleteInfo', 'CustomerController@deleteInfoCustomer')->name('page.customer.deleteInfo');
-Route::post('/customer/searchCustomer', 'CustomerController@searchCustomer')->name('page.customer.search');
-Route::post('/customer/editPayment', 'CustomerController@editPayment')->name('page.customer.editPayment');
-Route::post('/customer/editCustomer', 'CustomerController@editCustomer')->name('page.customer.editCustomer');
+Route::prefix('customer')->group(function () {
+    Route::get('', 'CustomerController@index')->name('page.customer');
 
-Route::get('/statistic', 'StatisticController@index')->name('page.statistic');
-Route::post('/statistic/searchDate', 'StatisticController@searchDate')->name('page.statistic.searchDate');
+    Route::post('info/add', 'CustomerController@addInfoCustomer')->name('page.customer.addInfo');
+    Route::post('info/delete', 'CustomerController@deleteInfoCustomer')->name('page.customer.deleteInfo');
+    Route::post('search', 'CustomerController@searchCustomer')->name('page.customer.search');
 
-Route::get('/setting', 'SettingController@index')->name('page.setting');
+    Route::post('edit/payment', 'CustomerController@editPayment')->name('page.customer.editPayment');
+    Route::post('edit/customer', 'CustomerController@editCustomer')->name('page.customer.editCustomer');
+});
+
+Route::prefix('statistic')->group(function () {
+    Route::get('', 'StatisticController@index')->name('page.statistic');
+    Route::post('search/date', 'StatisticController@searchDate')->name('page.statistic.searchDate');
+});
+
+Route::prefix('setting')->group(function () {
+
+    Route::get('', 'SettingController@index')->name('page.setting');
+    Route::prefix('refraction')->group(function () {
+        Route::post('add', 'RefractionController@refractionAdd')->name('page.setting.refractionAdd');
+        Route::post('edit', 'RefractionController@refractionEdit')->name('page.setting.refractionEdit');
+        Route::post('delete', 'RefractionController@refractionEdit')->name('page.setting.refractionDel');
+    });
+
+});
