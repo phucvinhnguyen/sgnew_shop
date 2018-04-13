@@ -16,7 +16,8 @@ class RefractionController extends Controller
 
     public function refractionAdd(Request $request)
     {
-        $refractionTitle = $request->get('title');
+        $refractionTitle = $request->get('refraction-title');
+
         $this->refractionErrorRepo->create(['title' => $refractionTitle]);
         return redirect()->route('page.setting');
     }
@@ -33,7 +34,11 @@ class RefractionController extends Controller
     public function refractionDel(Request $request)
     {
         $refractionId = $request->get('refraction-id');
-        $this->refractionErrorRepo->delete($refractionId);
+
+        if (isset($refractionId)) {
+            $this->refractionErrorRepo->delete($refractionId);
+        }
+
         return redirect()->route('page.setting');
     }
 }
