@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\Refraction\RefractionErrorRepository;
 use Illuminate\Http\Request;
 
 class RefractionController extends Controller
 {
+    private $refractionErrorRepo;
+
+    public function __construct(RefractionErrorRepository $refractionErrorRepository)
+    {
+        $this->refractionErrorRepo = $refractionErrorRepository;
+    }
+
     public function refractionAdd(Request $request)
     {
         $refractionTitle = $request->get('title');
