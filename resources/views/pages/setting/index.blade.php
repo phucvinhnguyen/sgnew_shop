@@ -20,6 +20,11 @@
     @include('pages.setting.modal.refraction.add-refraction')
     @include('pages.setting.modal.refraction.edit-refraction')
     @include('pages.setting.modal.refraction.del-refraction')
+
+    @include('pages.setting.modal.lens.add-lens')
+    @include('pages.setting.modal.lens.edit-lens')
+    @include('pages.setting.modal.lens.del-lens')
+
 @endsection
 
 @section('embed-scripts')
@@ -44,6 +49,22 @@
                 deleteModal.modal('show');
             })
 
+            $('.btn-lens-edit').click(function () {
+                var lensId = $(this).data('id');
+                var lensTitle = $(this).data('title');
+
+                var editModal = $("#edit-lens-modal");
+                editModal.find('.lens-id').val(lensId);
+                editModal.find('.lens-title').val(lensTitle);
+                editModal.modal('show');
+            })
+
+            $('.btn-lens-del').click(function () {
+                var lensId = $(this).data('id');
+                var delModal = $('#del-lens-modal');
+                delModal.find('.lens-id').val(lensId);
+                delModal.modal('show');
+            })
         })
     </script>
 @endsection

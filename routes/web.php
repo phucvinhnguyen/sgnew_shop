@@ -46,7 +46,13 @@ Route::prefix('setting')->group(function () {
     Route::prefix('refraction')->group(function () {
         Route::post('add', 'RefractionController@refractionAdd')->name('page.setting.refractionAdd');
         Route::post('edit', 'RefractionController@refractionEdit')->name('page.setting.refractionEdit');
-        Route::post('delete', 'RefractionController@refractionEdit')->name('page.setting.refractionDel');
+        Route::post('delete', 'RefractionController@refractionDel')->name('page.setting.refractionDel');
+    });
+
+    Route::prefix('lens')->group(function () {
+       Route::post('add', 'LensController@lensAdd')->name('page.setting.lensAdd');
+       Route::post('edit', 'LensController@lensEdit')->name('page.setting.lensEdit');
+       Route::post('delete', 'LensController@lensDel')->name('page.setting.lensDel');
     });
 
 });

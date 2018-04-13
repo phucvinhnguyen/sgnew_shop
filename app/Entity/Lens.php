@@ -8,4 +8,6 @@ class Lens extends Model
 {
     protected $table = 'lens';
     public $timestamps = false;
+
+    protected $fillable = ['title'];
 }

@@ -44,7 +44,7 @@
                     <div class="col-sm-6">
                         <div class="row">
                             <div class="col-sm-6"><h4>Loại tròng kính</h4></div>
-                            <div class="col-sm-6"><button class="btn btn-primary pull-right">Thêm</button></div>
+                            <div class="col-sm-6"><button class="btn btn-primary pull-right" data-toggle="modal" data-target="#add-lens-modal">Thêm</button></div>
                             <div class="clearfix"></div>
                         </div>
                         <table class="table table-striped table-bordered">
@@ -62,8 +62,8 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $item->title }}</td>
                                     <td align="center">
-                                        <a href="#" class="text text-info"><i class="fa fa-edit"></i></a>
-                                        <a href="#" class="text text-danger"><i class="fa fa-trash-o"></i></a>
+                                        <a href="#" class="text text-info btn-lens-edit" data-id="{{ $item->id }}" data-title="{{ $item->title }}"><i class="fa fa-edit"></i></a>
+                                        <a href="#" class="text text-danger btn-lens-del" data-id="{{ $item->id }}"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
