@@ -55,8 +55,11 @@ class CustomerController extends Controller
                 }
 
                 if (isset($lastestInfo) && !empty($lastestInfo)) {
-                    $lastestInfo['refraction_error'] = $this->refractionErrorRepository->find($lastestInfo->refraction_error_id)->title;
-                    $lastestInfo['lens'] = $this->lensRepository->find($lastestInfo->lens_id)->title;
+                    $customerRefractionError = $this->refractionErrorRepository->find($lastestInfo->refraction_error_id);
+                    $customerLens = $this->lensRepository->find($lastestInfo->lens_id);
+
+                    $lastestInfo['refraction_error'] = isset($customerRefractionError) ? $customerRefractionError->title : '';
+                    $lastestInfo['lens'] = isset($customerLens) ? $customerLens->title : '';
                 }
             }
         }

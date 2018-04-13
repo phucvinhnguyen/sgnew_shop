@@ -20,7 +20,7 @@
                                     <form action="{{ route('page.customer.search') }}" method="POST" id="searchCustomerPhone">
                                         {{ csrf_field() }}
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại khách hàng" value="{{ Request::query('phone') }}">
+                                            <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại khách hàng" value="{{ Request::query('phone') }}" required>
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default" type="submit">Tìm kiếm!</button>
                                             </span>
