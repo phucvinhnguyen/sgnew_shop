@@ -27,10 +27,7 @@ create table customer_info (
     right_eye varchar(64),
     view_far varchar(64),
     read_book varchar(64),
-    created_at timestamp default current_timestamp,
-    foreign key (lens_id) references lens(id),
-    foreign key (customer_id) references customer(id),
-    foreign key (refraction_error_id) references refraction_error(id)
+    created_at timestamp default current_timestamp
 );
 
 create table product (
@@ -41,5 +38,4 @@ create table product (
     reserved_price int not null default 0,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
-    foreign key (customer_id) references customer(id)
 );
