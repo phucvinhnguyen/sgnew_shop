@@ -23,10 +23,14 @@ class CheckoutController extends Controller
         $customerPhone = $request->get('customer_phone');
         $customerName = $request->get('customer_name');
 
-        if (isset($customerName) && !empty($customerName)) {
-            $attributes['full_name'] = $customerName;
-            $attributes['phone'] = $customerPhone;
-            $customerId = $this->customerRepository->createNewCustomer($attributes);
+        $phoneNumber = $this->customerRepository->getCustomerByPhone($customerPhone);
+
+        if (!isset($phoneNumber) || empty($phoneNumber)) {
+            if (isset($customerName) && !empty($customerName)) {
+                $attributes['full_name'] = $customerName;
+                $attributes['phone'] = $customerPhone;
+                $customerId = $this->customerRepository->createNewCustomer($attributes);
+            }
         }
         else {
             $customerId = $this->customerRepository->getCustomerByPhone($customerPhone)->id;
