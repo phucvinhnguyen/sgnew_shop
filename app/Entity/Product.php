@@ -15,4 +15,9 @@ class Product extends Model
     {
         return $query->where('customer_id', $id);
     }
+
+    public function scopeCreatedAt($query, $date)
+    {
+        return $query->where('created_at', $date);
+    }
 }

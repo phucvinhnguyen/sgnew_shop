@@ -31,6 +31,14 @@
                                 <span>Doanh thu</span>
                             </a>
                         </li>
+                        <li class="{{ isActiveRoute('page.statistc.customer') }}">
+                            <a href="{{ route('page.statistc.customer') }}">
+                                <i class="fa fa-dashboard icon">
+                                    <b class="bg-danger"></b>
+                                </i>
+                                <span>Xem khách theo ngày</span>
+                            </a>
+                        </li>
                         <li class="{{ isActiveRoute('page.setting') }}">
                             <a href="{{ route('page.setting') }}">
                                 <i class="fa fa-cog icon">

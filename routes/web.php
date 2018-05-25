@@ -38,6 +38,10 @@ Route::prefix('customer')->group(function () {
 Route::prefix('statistic')->group(function () {
     Route::get('', 'StatisticController@index')->name('page.statistic');
     Route::post('search/date', 'StatisticController@searchDate')->name('page.statistic.searchDate');
+    Route::prefix('customer')->group(function (){
+       Route::get('', 'StatisticCustomerController@index')->name('page.statistc.customer');
+       Route::post('search', 'StatisticCustomerController@searchDate')->name('page.statistic.customer.searchDate');
+    });
 });
 
 Route::prefix('setting')->group(function () {

@@ -73,4 +73,9 @@ class ProductRepository extends BaseRepository
     {
         return $this->model->select(DB::raw('customer_id, sum(reserved_price) as price'))->whereRaw('date(created_at) = \''. $date .'\'')->groupBy('customer_id')->get();
     }
+
+    public function getProductByDate($date)
+    {
+        return $this->model->whereRaw('date(created_at) = \''. $date . '\'')->get();
+    }
 }
